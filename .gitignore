@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Large files
+assignment_1c/la-haute-borne-data-2017-2020.xls
