@@ -133,3 +133,4 @@ dmypy.json
 assignment_1c/la-haute-borne-data-2017-2020.xls
 
 .DS_Store
+*.bip
