@@ -5,15 +5,16 @@ function [data] = iter_solver(data, tip_speed_ratio, blade_r, angle_of_attack, c
 % 
 % Callum Morrison, 2020
 
+% Calculate initial values based on provided data
 local_speed_ratio = tip_speed_ratio * (blade_r / max(blade_r));
 data.inflow_angle = atan((1 - data.axial_induction_factor) ./ (local_speed_ratio' .* (1 + data.angular_induction_factor)));
-
-pitch_angle = data.inflow_angle - angle_of_attack;
+data.pitch_angle = data.inflow_angle - angle_of_attack;
 
 % Find coefficient of lift and drag from aerofoil lookup table
 reynolds = 100000;
 
-C_L = interp2(C_L_lookup.reynolds, C_L_lookup.angle_of_attack, C_L_lookup.C_L, reynolds, angle_of_attack);
+% Obtain coefficients of lift and drag
+C_L = interp2(C_L_lookup.reynolds, C_L_lookup.angle_of_attack, C_L_lookup.C_L, reynolds, rad2deg(angle_of_attack));
 C_D = 0.1;
 
 blade_solidarity = number_blades .* chord_distribution ./ (2 * pi * blade_r);
